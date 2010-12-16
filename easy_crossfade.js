@@ -33,7 +33,7 @@ var EasyCrossFade = (function(){
       var image = new Image();
       image.src = this.path;
       cacheImageSrc.push(image);
-      $(image).load(function(){
+      $(image).ready(function(){
         loadedImageCounts++;
         if(loadedImageCounts == imageLength){
           imageLoadedFlag = true;
