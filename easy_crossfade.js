@@ -2,7 +2,7 @@
 EasyCrossFade
 Copyright (c) 2010 waco, released under the MIT license
 requre: JQuery (any version)
-version: 0.0.1
+version: 0.0.2
 */
 
 // settings
