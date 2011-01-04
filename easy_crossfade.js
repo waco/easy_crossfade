@@ -9,7 +9,7 @@ version: 0.0.2
 var EasyCrossFade = (function(){
   // element to crossfade
   var elementObject;
-  
+
   // crossfade images
   var imageDir = "";
   var catchImages = [];
@@ -18,14 +18,14 @@ var EasyCrossFade = (function(){
   // crossfade speed (msec)
   var slideSpeed = 5000;
   var fadeSpeed = 1000;
-  
+
   var imageLength = 0;
   var imageLoopPosition = 0;
   var imageIndex = 0;
   var crossFadeImages = [];
   var timer;
   var imageLoadedFlag = false;
-    
+
   var preload = function(){
     var cacheImageSrc = [];
     var loadedImageCounts = 0;
@@ -59,7 +59,7 @@ var EasyCrossFade = (function(){
 
       nextFrame.animate({opacity: "show"}, fadeSpeed, "linear", function(){
         elementObject.css("background", nextFrameBackground).empty();
-        
+
         if(crossFadeImages[imageIndex].link){
             elementObject.append('<a href="' + crossFadeImages[imageIndex].link +
               '" style="display: block; width: 100%; height: 100%;"></a>');
@@ -69,34 +69,34 @@ var EasyCrossFade = (function(){
       });
       setTimeout(crossFade, slideSpeed);
   }
-  
+
   return {
     init: function(element, params){
       if(!element) return;
-      
+
       if(params.imageDir) imageDir = params.imageDir;
       if(params.catchImages) catchImages = params.catchImages;
       if(params.loopImages) loopImages = params.loopImages;
       if(params.slideSpeed) slideSpeed = params.slideSpeed;
       if(params.fadeSpeed) fadeSpeed = params.fadeSpeed;
-  
+
       crossFadeImages = $(catchImages.concat(loopImages)).map(function(){
         var path, link;
         if(this instanceof Array){ path = this[0]; link = this[1]; }
         else { path = this; }
         return { path: imageDir + path, link: link }
       });
-      
-      imageLoopPosition = loopImages.length - 1;
+
+      imageLoopPosition = catchImages.length;
       imageLength = crossFadeImages.length;
-      
+
       preload();
-      
+
       $(document).ready(function(){
         elementObject = $(element);
         if(params.width) elementObject.width(params.width);
         if(params.height) elementObject.height(params.height);
-        
+
         startCrossFade();
       });
     }
